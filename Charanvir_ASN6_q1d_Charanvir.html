@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+	<p id ="1oc"></p>
+	<script>
+		const xmlHttpRequest = new XMLHttpRequest();
+		xmlHttpRequest.open("GET", "datasetA.json", false);
+		xmlHttpRequest.send();
+		const responseXML = xmlHttpRequest.responseText;
+		const jsonData = JSON.parse(responseXML);
+		var output = "<table border='1'><tr><th>Recipes</th></tr>";
+		for(i=0; i<3; i++)
+		{
+			output += "<tr>";
+			output += "<td>" + jsonData.zip + "</td";
+			output += "</tr>";
+		}
+		output += "</table>";
+		document.getElementById("1oc").innerHTML = output
+	</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<html>
+<body>
+<div>
+<input type="file" id="jsonfileinput" />
+  <p id="txtTable">
+   
+       Load table Here
+   </p>
+</div>
+
+<script>
+
+document.getElementById("jsonfileinput").addEventListener("change", function() {
+  var file_to_read = document.getElementById("jsonfileinput").files[0];
+  var fileread = new FileReader();
+  fileread.onload = function(e) {
+    var content = e.target.result;
+    var intern = JSON.parse(content); 
+	PopulateData(intern);
+  };
+  fileread.readAsText(file_to_read);
+});
+
+function PopulateData(data) {
+
+ if (data.recipeBook.recipe.length > 0) {
+
+	var html = "<tr>"+
+	"<td><b>Description</b></td>"+
+	"<td><b>Calories Text</b></td>"+
+	"<td><b>Calories Grade</b></td></tr>";
+	for (let i=0; i < data.recipeBook.recipe.length ; i++) {
+	var calories = data.recipeBook.recipe[i].Calories;
+	var caltext = calories["#text"]; 
+	var calgrade = calories["-grade"]; 
+	var description = data.recipeBook.recipe[i].description;
+						 	
+	if(i == data.recipeBook.recipe.length-1)	{
+	html +="<tr>"+
+	"<td>"+ description+ "</td>"+
+	"<td>"+ caltext + "</td>"+
+	"<td>"+ calgrade + "</td>"+"</tr>";
+	"</table>";
+	}						
+						
+	}
+						
+	document.getElementById("txtTable").innerHTML = "<table  border='2px'>"+html;
+							
+     }
+ }
+  
+  </script>
+</body>
+</html>

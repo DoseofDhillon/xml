@@ -1,0 +1,10 @@
+{
+    "courses":[
+	    {"name":"PLSQL", "code":"ITE-5220", "startdate":"01/07/2022", "enddate":"04/24/2022", "status":"passing"},
+	    {"name":"JAVA", "code":"ITC-5201", "startdate":"01/07/2022", "enddate":"04/24/2022", "status":"passing"},
+	    {"name":"XML", "code":"ITC-5202", "startdate":"01/07/2022", "enddate":"04/24/2022", "status":"passing"},
+	    {"name":"C.#", "code":"ITE-5230", "startdate":"01/07/2022", "enddate":"04/24/2022", "status":"passing"},
+	    {"name":"DATABASE DEV", "code":"ITE-5221", "startdate":"01/07/2022", "enddate":"04/24/2022", "status":"passing"},
+	    {"name":"SQL SERVER DATABASE", "code":"ITE-5223", "startdate":"01/07/2022", "enddate":"04/24/2022", "status":"passing"}
+	]
+}

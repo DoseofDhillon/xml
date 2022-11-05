@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title> Activity-3 Week 10 </title>
+
+<body>
+
+  <button type="button" onclick="loadDoc()">Click for Weather Information</button>
+  <br><br>
+  <p id="demo"></p>
+
+  <script>
+    function loadDoc() {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          myFunction(this.responseXML);
+        }
+      };
+      xhttp.open("GET", "https://api.openweathermap.org/data/2.5/weather?q=Toronto&mode=xml&lang=fr&appid=de2a0a6888424d8c56949b6bcd79e655&units=metric", true);
+      xhttp.send();
+    }
+    function myFunction(xmlResponse) {
+      console.log(xmlResponse);
+      var xmlOutput = "";
+      var cityName = xmlResponse.getElementsByTagName("city")[0];
+      xmlOutput += "<h2>City:" + cityName.getAttribute("name") + " </h2>"
+      var temperature = xmlResponse.getElementsByTagName("temperature")[0];
+      xmlOutput += "<p> Current Temp: " + (temperature.getAttribute("value"));
+     var wind = xmlResponse.getElementsByTagName("wind")[0];
+      xmlOutput += "<p> Wind: " + (wind.getElementsByTagName("speed")[0].getAttribute("value"));
+      var hum = xmlResponse.getElementsByTagName("humidity")[0];
+      xmlOutput += "<p> Humidity: " + (hum.getAttribute("value"));
+      xmlOutput += "<p> Weather Condition: " + xmlResponse.getElementsByTagName("weather")[0].getAttribute("value");
+      document.getElementById("demo").innerHTML = xmlOutput;
+    }
+  </script>
+</body>
+
+</html>

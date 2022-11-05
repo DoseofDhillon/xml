@@ -1,0 +1,65 @@
+ <!DOCTYPE HTML>
+<html>
+   <head>
+      <title> Assignment Question 7 - 1 </title>
+   </head>
+   <body>
+      <button onclick="triggerDisplay()">Show weather for Toronto and Oakville</button>
+      <p id="Toronto"></p>
+      <br>
+      <p id="Oakville"></p>
+      <script>
+         function triggerDisplay() {
+             //create object of xmlHttpRequest 
+            const toronto = new XMLHttpRequest();
+            //create object of xmlHttpRequest
+            const oakville = new XMLHttpRequest();
+            //torontoXMLHttpRequest is fired when load state of html page changes
+            toronto.onreadystatechange = function() {
+            //readyState 4 refers request has been sent and response is readyState
+            //status 200 means success
+               if (this.readyState === 4 && this.status === 200) {
+            //display method called by parsing the JSON response with JSON parse method
+                   displayToronto(JSON.parse(this.responseText));
+               }
+            };
+            //display method called by parsing the JSON response with JSON parse method
+            oakville.onreadystatechange = function() {
+             //readyState 2 refers headers and status are available
+               //status 200 means success
+            if (this.readyState === 4 && this.status === 200) {
+            //display method called by parsing the JSON response with JSON parse method
+                   displayOakville(JSON.parse(this.responseText));
+               }
+         };
+         //make rest call for given url
+         //open method takes request method type, request url and whether async true or false
+         toronto.open("GET", "https://api.openweathermap.org/data/2.5/weather?q=Toronto&lang=fr&appid=de2a0a6888424d8c56949b6bcd79e655&units=metric", true);
+         //make rest call for given url
+         //open method takes request method type, request url and whether async true or false
+         oakville.open("GET", "https://api.openweathermap.org/data/2.5/weather?q=Oakville&lang=fr&appid=de2a0a6888424d8c56949b6bcd79e655&units=metric", true);
+         //request sent
+         toronto.send();
+         //request sent
+         oakville.send();
+         }
+        
+         //function to take input json string and add to html   
+         function displayToronto(parse) {
+         //append the requested parameters in the html
+            document.getElementById("Toronto").innerHTML = "<h1>Toronto</h1>" +
+                "<table border='1'><tr><th>Temperature</th><th>Description</th><th>Wind Speed</th><th>Humidity</th</tr><tr><td>" + parse.main.temp +
+                "&deg;C</td><td>" + parse.weather[0].description + "</td><td>"+parse.wind.speed+"km/h</td><td>"+parse.main.humidity+"</td></tr></table>";
+         }
+
+         //function to take input json string and add to html   
+         function displayOakville(parse) {
+         //append the requested parameters in the html
+            document.getElementById("Oakville").innerHTML = "<h1>Oakville</h1>" +
+                "<table border='1'><tr><th>Temperature</th><th>Description</th><th>Wind Speed</th><th>Humidity</th</tr><tr><td>" + parse.main.temp +
+                "&deg;C</td><td>" + parse.weather[0].description + "</td><td>"+parse.wind.speed+"km/h</td><td>"+parse.main.humidity+"</td></tr></table>";
+         }
+
+      </script>
+   </body>
+</html>

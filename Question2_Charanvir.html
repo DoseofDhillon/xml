@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+	<p id ="1oc"></p>
+	<script>
+		const xmlHttpRequest = new XMLHttpRequest();
+		xmlHttpRequest.open("GET", "Question2_Charanvir.json", false);
+		xmlHttpRequest.send();
+		const responseXML = xmlHttpRequest.responseText;
+		const jsonData = JSON.parse(responseXML);
+		var output = "<table border='1'><tr><th>Course</th><th>Code</th><th>Start Date</th><th>End Date</th><th>Status</th></tr>";
+		for(i=0; i<6; i++)
+		{
+			output += "<tr>";
+            output += "<td>" + jsonData.courses[i].name + "</td>";
+			output += "<td>" + jsonData.courses[i].code + "</td>";
+            output += "<td>" + jsonData.courses[i].startdate + "</td>";
+            output += "<td>" + jsonData.courses[i].enddate + "</td>";
+            output += "<td>" + jsonData.courses[i].status + "</td>";
+            output += "</tr>";
+		}
+		output += "</table>";
+		document.getElementById("1oc").innerHTML = output
+	</script>
+</body>
+</html>
